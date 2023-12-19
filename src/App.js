@@ -5,7 +5,6 @@ import { Configuration, OpenAIApi } from "openai";
 function App() {
   const [text, setText] = useState("");
   const [areaOfInterest, setAreaOfInterest] = useState("");
-  const [subject, setSubject] = useState("");
   const [keywords, setKeywords] = useState("");
   const [summarizedtext, setSummarizedtext] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,13 +19,11 @@ function App() {
     setLoading(true);
     e.preventDefault();
 
-    // Check if the input values are not text
     if(!isValidInput(areaOfInterest) || !isValidInput(keywords)){
       alert("please enter values for area of Interest and keywords");
       setLoading(false);
       return;
     }
-    
     
     const prompt = generatePrompt(areaOfInterest,keywords);
 
@@ -48,7 +45,6 @@ function App() {
       });
   };
 
-  // Helper function to validate if the input is text
   const isValidInput = (input, fieldName) => {
     const isValid = typeof input === "string" && input.trim() !== "";
     if (!isValid) {
@@ -58,7 +54,7 @@ function App() {
   };
   
 
-  const generatePrompt = (areaOfInterest, subject, keywords) => {
+  const generatePrompt = (areaOfInterest, keywords) => {
     return `recomend 5 research topics for area of interest : ${areaOfInterest} and \nKeywords: ${keywords}\n`;
   };
 
